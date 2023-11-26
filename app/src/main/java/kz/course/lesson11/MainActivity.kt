@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.AppCompatButton
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
@@ -12,7 +12,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var addButton: AppCompatButton
     private lateinit var removeButton: AppCompatButton
     private lateinit var adapter: NamesAdapter
-    private var allNames = mutableListOf<String>()
+    private val allNumbers = mutableListOf<Int>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,12 +31,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
-        addButton.setOnClickListener {addName()}
-        removeButton.setOnClickListener {removeName()}
+        addButton.setOnClickListener {addNumber()}
+        removeButton.setOnClickListener {removeNumber()}
     }
 
     private fun setLayout() {
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = GridLayoutManager(this, 4)
     }
 
     private fun initAdapter() {
@@ -46,31 +47,23 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     private fun initNames() {
 
-        val names = mutableListOf("Nurasyl", "Ainura")
-        names.add("Alibek")
-        names.add("Orazaiym")
-        names.add("Qairat")
+        val numbers = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+        allNumbers.addAll(numbers)
 
-        allNames.addAll(names)
-        allNames.addAll(names)
-        allNames.addAll(names)
-
-        adapter.setNames(allNames)
+        adapter.setNames(allNumbers)
         adapter.notifyDataSetChanged()
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun addName() {
-        allNames.add(allNames.size.toString())
+    private fun addNumber() {
+        allNumbers.add(allNumbers.size + 1)
 
         adapter.notifyDataSetChanged()
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun removeName() {
-        if (allNames.contains("Orazaiym")) {
-            allNames.remove("Orazaiym")
-        }
+    private fun removeNumber() {
+        allNumbers.removeAt(allNumbers.size - 1)
 
         adapter.notifyDataSetChanged()
     }

@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class NamesAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var names: List<String> = emptyList()
+class NamesAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var numbers: List<Int> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.name_item, parent, false)
@@ -15,23 +15,23 @@ class NamesAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return names.size
+        return numbers.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val name = names[position]
-        (holder as NameViewHolder).onBind(name)
+        val number = numbers[position]
+        (holder as NameViewHolder).onBind(number)
     }
 
     class NameViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
         lateinit var nameTextView: TextView
-        fun onBind(name: String) {
+        fun onBind(number: Int) {
             nameTextView = view.findViewById(R.id.nameTextView)
-            nameTextView.text = name
+            nameTextView.text = number.toString()
         }
     }
 
-    fun setNames(names: List<String>) {
-        this.names = names
+    fun setNames(numbers: MutableList<Int>) {
+        this.numbers = numbers
     }
 }
