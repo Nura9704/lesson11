@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initViews()
-        setLayout()
         initAdapter()
         initNames()
         initListeners()
@@ -35,18 +34,12 @@ class MainActivity : AppCompatActivity() {
         removeButton.setOnClickListener {removeNumber()}
     }
 
-    private fun setLayout() {
-        recyclerView.layoutManager = GridLayoutManager(this, 4)
-    }
-
     private fun initAdapter() {
         adapter = NamesAdapter()
         recyclerView.adapter = adapter
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun initNames() {
-
         val numbers = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
         allNumbers.addAll(numbers)
 
@@ -54,14 +47,12 @@ class MainActivity : AppCompatActivity() {
         adapter.notifyDataSetChanged()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun addNumber() {
         allNumbers.add(allNumbers.size + 1)
 
         adapter.notifyDataSetChanged()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun removeNumber() {
         allNumbers.removeAt(allNumbers.size - 1)
 
