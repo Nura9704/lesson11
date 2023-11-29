@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var removeButton: AppCompatButton
     private lateinit var adapter: NamesAdapter
     private var allNames = mutableListOf<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
